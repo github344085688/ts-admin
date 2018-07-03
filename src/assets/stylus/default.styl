@@ -1,0 +1,88 @@
+@import "./common"
+@font-face {
+  font-family: 'icomoon';
+  src:  url('/src/assets/fonts/icomoon.eot?q7iq9o');
+  src:  url('/src/assets/fonts/icomoon.eot?q7iq9o#iefix') format('embedded-opentype'),
+          url('/src/assets/fonts/icomoon.ttf?q7iq9o') format('truetype'),
+          url('/src/assets/fonts/icomoon.woff?q7iq9o') format('woff'),
+          url('/src/assets/fonts/icomoon.svg?q7iq9o#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="select-"], [class*=" select-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.select-Arrowb:before {
+  content: "\e901";
+  color: #fff;
+}
+
+.select-close:before {
+  content: "\e900";
+  color: #fff;
+}
+
+$boderColor= #afb5c5;
+$focus-line= #b34049;
+$errorsColor= #a54b4e;
+
+input()
+  outline none;border none; background none;
+
+$box-shadow()
+  box-shadow 0px 1px 3px 0px #d9d9d9;
+  html.ie8 &,
+  html.ie7 &,
+  html.ie6 &
+    border 2px solid #bfbfbf;
+
+$field-input()
+  $box-shadow();$pad(l 25px no,r 25px no)
+
+$validateBox()
+  $WH(h 16px,'');color #999;line-height 10px;font-size 16px;
+
+$transform()
+   transform scaleX(0); transition transform .65s cubic-bezier(0.23, 1, 0.32, 1);
+
+fz(prop)
+  if prop[1]
+    font-size prop[0];/*no*/
+  else
+    font-size prop[0]
+
+
+/*
+pad(types = padding, n = 5px)
+  if padding in types
+    padding n
+  if margin in types
+    margin n
+
+$font-size = 14px
+
+border-radius()
+  border-radius arguments
+  outline none
+  border none
+
+display()
+  display arguments
+
+support-for-ie ?= true
+opacity(n)
+  opacity n
+  if support-for-ie
+    filter unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=' + round(n * 100) + ')')*/
