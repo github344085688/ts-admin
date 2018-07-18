@@ -30,12 +30,12 @@ const routes: RouteConfig[] = [
   {
     path: '/main',
     name: 'main',
-    component: main
+    component:warehouse
   },
   {
     path: '/warehouse',
     name: 'warehouse',
-    component: warehouse
+    component: main
   },
   {
     path: '/shops',

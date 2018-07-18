@@ -26,8 +26,8 @@ export default class login extends axVue {
   };
 
   selectChange:any='';
-  setPhoneSelect:any=['BevmoVal', 'VIZDDSIO', 'REWKEEN', 'SPjeTsSun Power'];
-  setEmailSelect:any=['BevmoVal', 'VIZDDSIO', 'REWKEEN', 'SPjeTsSun Power'];
+  setPhoneSelect:any=[];
+  setEmailSelect:any=[];
 
   mounted() {
 

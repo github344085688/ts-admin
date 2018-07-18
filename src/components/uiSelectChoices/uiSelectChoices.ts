@@ -11,7 +11,7 @@ import template from './uiSelectChoices.vue'
 })
 export default class TextFile extends axVue {
     @Prop({
-        default:  ["Bevmo", "VIZIO", "KEEN", "Sun Power"]
+        default:  []
     })
     deselectData: any;
 
@@ -35,6 +35,9 @@ export default class TextFile extends axVue {
     isFocused:boolean=false;
     isActive:boolean=false;
 
+    get isPlaceholder():any{
+        if(this.deselectData.length>0 || this.isFocused ) return "isPlaceholder";
+    }
 
     get isValidate(): any{
          if(this.isFocused || this.value!='')   return true
@@ -49,9 +52,16 @@ export default class TextFile extends axVue {
     }
     handleFocus(){
        this.isFocused=true;
+       this.isActive=true;
     }
     handleBlur(){
-       this.isFocused=false;
+        this.isActive=false;
+        if(this.deselectData.length<1){
+            this.isFocused=false;
+        return false
+        }
+
+
 
     }
     pushDeselectDat(item:any){

@@ -5,6 +5,8 @@ import store from './store'
 import {i18n,config} from './i18OrLanguage/I18nConfig'
 import VeeValidate from 'vee-validate'
 import setFontSize from './typings/defaultFontSize'
+import RXeEvent from './directive/rx-event'
+Vue.use(RXeEvent)
 Vue.use(VeeValidate, config)
 Vue.use(setFontSize)
 Vue.config.productionTip = false;

@@ -1,35 +1,43 @@
 <template lang="pug">
     div
        .select-choices
-           input(type="button"  v-on:focus="isActive=true" v-on:blur="isActive=false")
+           input(type="button"
+           v-on:change="handleChange"
+           v-on:focus="handleFocus"
+           v-on:input="handleInput"
+           v-on:blur="handleBlur"
+           )
            .item-Select(v-for="item in deselectData" ) {{item}}
                .delete(v-on:click="deleteChoiceData(item)")
-           //.PopPlaceholder for Usages in All Places...
-
+           .PopPlaceholder(:class='isPlaceholder') for Usages in All Places...
 
            slot
            .open-box(v-bind:class="isActive ? 'activeClass' : ''")
                 ul
                     li(v-for="item in opensData" )
-                       input(type="button" v-on:click="pushDeselectDat(item)"  v-on:focus="isActive=true" v-on:blur="isActive=false" v-bind:value="item")
+                       input(type="button" v-on:click="pushDeselectDat(item)"  v-on:focus="[isFocused=true,isActive=true]" v-on:blur="[isFocused=false,isActive=false]" v-bind:value="item")
 
 </template>
 <style lang="stylus">
 @import "../../assets/stylus/default"
     .select-choices
-        $bodall(solid 1px #ccc no);$dflex(fd row,fw wrap,jc flex-start,ai center,ac center); width 100%; min-height 40px;/*no*/ display inline-block; position relative; border #ccc solid 1px;/*no*/ border-radius 4px;/*no*/ background #fff;padding-right 40px;/*no*/
+        $bodall(solid 1px #ccc no);$dflex(fd row,fw wrap,jc flex-start,ai center,ac center); margin-top 40px; width 100%; min-height 40px;/*no*/ position relative; border #ccc solid 1px;/*no*/ border-radius 4px;/*no*/ background #fff;padding-right 40px;/*no*/ box-sizing border-box;
         &::before
             $wh(w 20px no,h 20px no);$pAbM(p,r 25px no,t 50%); margin-top -10px;/*no*/ font-size 18px;/*no*/ content "\e901";
         input[type=button]
-            $wh(w 100%,h 100%);$pAbM(p,r 0,t 0,l 0, b 0);background none; border:none;outline none;cursor pointer; box-sizing border-box;
+            $wh(w 100%,h 100%);$pAbM(p,r 0,t 0,l 0, b 0);background none; border:none;outline none;cursor pointer; box-sizing border-box; z-index 1;
         .PopPlaceholder
-            flex 1;  display inline-block;  min-width 150px;  height 40px;/*no*/ line-height 40px;/*no*/  padding-left 40px;
+            $pAbM(p,l 0,t 0); z-index 0;  display inline-block; padding-left 40px;  min-width 150px;  height 40px;/*no*/ line-height 40px;/*no*/  font-size :14px;/*no*/ transition all .5s
+        .isPlaceholder
+            top -100%;transition all .5s;padding-left 0px;
+
+
         .item-Select
-            flex 1; $pad(l 15px, r 25px no); min-width 80px; display inline-block; background #e8e8e8; margin 4px 5px;/*no*/ align-self center;border-radius 4px;/*no*/ position relative; font-size 14px; line-height 28px;/*no*/
+            $pad(l 15px, r 25px no);z-index 2; min-width 80px; display inline-block; background #e8e8e8; margin 4px 5px;/*no*/ align-self center;border-radius 4px;/*no*/ position relative; font-size 14px; line-height 28px;/*no*/
             .delete
                 $pAbM(p,r 3px no,t 50%);margin-top -10px;/*no*/ $wh(w 18px no,h 18px no);
                 &::before
-                   font-size 18px;/*no*/ content "\e900"; color #a4a4a4; line-height normal;
+                   font-size 18px;/*no*/ content "\e900"; color #a4a4a4; line-height normal;cursor pointer;
         .open-box
             $pAbM(p,l 0,t 100%,r 0); margin-top 15px; max-height 150px;/*no*/  background #fff;box-shadow 0px 0px 4px #333333; border-radius 4px;/*no*/ z-index 10; height 0; overflow hidden;
             &::before

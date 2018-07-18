@@ -1,14 +1,18 @@
 <template lang="pug">
     div
        .input-select-choices
+           //lo-ding
            .Select-box
                 .item-Select(v-for="item in deselectData" ) {{item}}
                    .delete(v-on:click="deleteChoiceData(item)")
            .input-box
-                 input(type="text"  v-on:blur="isActive=false")
-           //.PopPlaceholder for Usages in All Places...
-
-
+                 input(
+                 type="text"
+                 v-model="inputdatas"
+                 v-on:blur="isActive=false"
+                 v-on:focus="handleFocus($event)"
+                 v-on:input="handleInput($event)"
+                  )
            slot
            .open-box(v-bind:class="isActive ? 'activeClass' : ''")
                 ul
