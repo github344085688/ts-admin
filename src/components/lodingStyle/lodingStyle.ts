@@ -1,7 +1,7 @@
 /**
  * Created by f on 2018/5/22.
  */
-import {Component} from "vue-property-decorator";
+import {Component, Prop} from "vue-property-decorator";
 import axVue from '../../httpAnency'
 import template from './lodingStyle.vue'
 @Component({
@@ -10,5 +10,9 @@ import template from './lodingStyle.vue'
     }
 })
 export default class TextFile extends axVue {
+    @Prop({
+        default:  '5px'
+    })
+    wh: any;
 
 }

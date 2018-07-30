@@ -1,17 +1,24 @@
 /**
  * Created by f on 2018/5/22.
  */
-import {Component, Prop} from "vue-property-decorator";
+import {Component, Prop, Watch} from "vue-property-decorator";
 import axVue from '../../httpAnency'
 import template from './uiSelectChoices.vue'
 @Component({
+    name: 'uiSelectChoices',
     mixins: [template],
-    components:{
+    components: {},
+    filters: {
+        filtersDatas(value: any) {
+            if (value.Name) return value.Name;
+            else  return value;
+        }
     }
 })
+
 export default class TextFile extends axVue {
     @Prop({
-        default:  []
+        default: []
     })
     deselectData: any;
 
@@ -30,48 +37,80 @@ export default class TextFile extends axVue {
     })
     value: string;
 
-    opensData:Array<any> = ["BevmoVal", "VIZDDSIO", "REWKEEN", "SPjeTsSun Power"];
-    isPopPlaceholders:boolean = true;
-    isFocused:boolean=false;
-    isActive:boolean=false;
+    callbackData: any = [];
 
-    get isPlaceholder():any{
-        if(this.deselectData.length>0 || this.isFocused ) return "isPlaceholder";
+    /*  opensData:Array<any> = ['BevmoVal','REWKEEN','VIZDDSIO'];*/
+    /* opensData:Array<any> = [1,2,3];*/
+
+   opensData: Array<any> = [{id: 'qz-0501', Name: 'BevmoVal'}, {id: 'qz-0701', Name: 'REWKEEN'}, {
+        id: 'qt-00d1',
+        Name: 'VIZDDSIO'
+    }, {id: 'qz-45401', Name: 'SPjeTsSun Power'}];
+
+
+    isPopPlaceholders: boolean = true;
+    isFocused: boolean = false;
+    isActive: boolean = false;
+
+
+    mounted() {
     }
 
-    get isValidate(): any{
-         if(this.isFocused || this.value!='')   return true
-         else return false
+    @Watch("value")
+    ishanevalidates() {
+    }
+
+    get isPlaceholder(): any {
+        if (this.deselectData.length > 0 || this.isFocused) return "isPlaceholder";
+    }
+
+    get isValidate(): any {
+        if (this.isFocused || this.value != '')   return true
+        else return false
 
     }
-    handleInput(){
 
+    handleInput() {
     }
-    handleChange(){
 
+    handleChange() {
     }
-    handleFocus(){
-       this.isFocused=true;
-       this.isActive=true;
+
+    handleFocus() {
+        this.isFocused = true;
+        this.isActive = true;
     }
-    handleBlur(){
-        this.isActive=false;
-        if(this.deselectData.length<1){
-            this.isFocused=false;
-        return false
+
+    handleBlur() {
+        this.isActive = false;
+        if (this.deselectData.length < 1) {
+            this.isFocused = false;
+            return false
         }
-
-
-
     }
-    pushDeselectDat(item:any){
-        this.isActive=true;
-       if(this.deselectData.find((value:any) => value ==item)) return
-       else this.deselectData.push(item);
+
+    pushDeselectDat(item: any) {
+        this.isActive = true;
+        if (this.deselectData.find((value: any) => value == item)) return false
+        this.deselectData.push(item);
+        if (item.Name) {
+            this.callbackData.push(item.id);
+        }
+        else {
+            this.callbackData.push(item);
+        }
+        this.$emit('update:selectData', this.callbackData)
     }
-    deleteChoiceData(items:any){
-        this.deselectData.splice(this.deselectData.indexOf(items),1);
-        this.$emit('update:selectData', this.deselectData)
+
+    deleteChoiceData(item: any) {
+        this.deselectData.splice(this.deselectData.indexOf(item), 1);
+        if (item.Name) {
+            this.callbackData.splice(this.callbackData.indexOf(item.id), 1);
+        }
+        else {
+            this.callbackData.splice(this.callbackData.indexOf(item), 1);
+        }
+        this.$emit('update:selectData', this.callbackData)
     }
 
 

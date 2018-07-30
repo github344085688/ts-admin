@@ -1,40 +1,19 @@
 <template lang="pug">
-
-    <div class="sk-three-bounce">
-    <div class="sk-bounce-1 sk-child"></div>
-    <div class="sk-bounce-2 sk-child"></div>
-    <div class="sk-bounce-3 sk-child"></div>
+    .sk-three-bounce
+        .sk-bounce-1(:style="{width:wh,height:wh}")
+        .sk-bounce-2(:style="{width:wh,height:wh}")
+        .sk-bounce-3(:style="{width:wh,height:wh}")
     </div>
-
-
 </template>
 <style lang="stylus">
-    section {
-        flex: 1 1 25%;
-    }
-
-    .sk-three-bounce {
-        width: 8em;
-        margin: auto;
-        text-align: center;
-    }
-    .sk-three-bounce .sk-child {
-        width: 2em;
-        height: 2em;
-        background-color: #337ab7;
-        border-radius: 100%;
-        display: inline-block;
-        -webkit-animation: sk-three-bounce 1.4s ease-in-out 0s infinite both;
-        animation: sk-three-bounce 1.4s ease-in-out 0s infinite both;
-    }
-    .sk-three-bounce .sk-bounce-1 {
-        -webkit-animation-delay: -0.32s;
-        animation-delay: -0.32s;
-    }
-    .sk-three-bounce .sk-bounce-2 {
-        -webkit-animation-delay: -0.16s;
-        animation-delay: -0.16s;
-    }
+    .sk-three-bounce
+        display inline-block; width 8em; margin auto; text-align center;
+        &>div
+           background-color #337ab7; border-radius 100%; display inline-block; -webkit-animation sk-three-bounce 1.4s ease-in-out 0s infinite both; animation sk-three-bounce 1.4s ease-in-out 0s infinite both; margin-left 5px;
+        .sk-bounce-1
+            -webkit-animation-delay -0.32s; animation-delay -0.32s;
+        .sk-bounce-2
+            -webkit-animation-delay -0.16s; animation-delay -0.16s;
 
     @-webkit-keyframes sk-three-bounce {
         0%, 80%, 100% {

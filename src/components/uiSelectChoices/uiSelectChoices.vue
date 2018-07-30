@@ -1,21 +1,20 @@
 <template lang="pug">
     div
        .select-choices
-           input(type="button"
-           v-on:change="handleChange"
-           v-on:focus="handleFocus"
-           v-on:input="handleInput"
-           v-on:blur="handleBlur"
-           )
-           .item-Select(v-for="item in deselectData" ) {{item}}
+           .item-Select(v-for="item in deselectData" ) {{item | filtersDatas}}
                .delete(v-on:click="deleteChoiceData(item)")
            .PopPlaceholder(:class='isPlaceholder') for Usages in All Places...
-
+           input(type="button"
+            v-on:change="handleChange"
+            v-on:focus="handleFocus"
+            v-on:input="handleInput"
+            v-on:blur="handleBlur"
+            )
            slot
            .open-box(v-bind:class="isActive ? 'activeClass' : ''")
                 ul
                     li(v-for="item in opensData" )
-                       input(type="button" v-on:click="pushDeselectDat(item)"  v-on:focus="[isFocused=true,isActive=true]" v-on:blur="[isFocused=false,isActive=false]" v-bind:value="item")
+                       input(type="button" v-on:click="pushDeselectDat(item)"  v-on:focus="[isFocused=true,isActive=true]" v-on:blur="[isFocused=false,isActive=false]" v-bind:value="item | filtersDatas")
 
 </template>
 <style lang="stylus">
