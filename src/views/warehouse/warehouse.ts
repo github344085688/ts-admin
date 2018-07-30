@@ -5,6 +5,7 @@ import {Component} from 'vue-property-decorator';
 import template from './warehouse.vue'
 import uiSelectChoices from '../../components/uiSelectChoices/uiSelectChoices.ts'
 import inputSelectChoices from '../../components/inputSelectChoices/inputSelectChoices.ts'
+import selectFilters from '../../components/selectFilters/selectFilters.ts'
 import axVue from '../../httpAnency'
 
 
@@ -13,6 +14,7 @@ import axVue from '../../httpAnency'
   components: {
     'ui-select-choices':uiSelectChoices,
     'input-select-choices':inputSelectChoices,
+    'select-filters':selectFilters,
   }
 })
 export default class login extends axVue {
@@ -26,8 +28,12 @@ export default class login extends axVue {
   };
 
   selectChange:any='';
-  setPhoneSelect:any=[];
-  setEmailSelect:any=[];
+  setPhoneSelect:any=['SPjeTsSun Power', 'SPjeTsSun Power', 'SPjeTsSun Power','SPjeTsSun Power'];
+  setPhonesSelect:any=[{id: 'qz-0501', Name: 'BevmoVal'}, {id: 'qz-0701', Name: 'REWKEEN'}, {
+    id: 'qt-00d1',
+    Name: 'VIZDDSIO'
+  }, {id: 'qz-45401', Name: 'SPjeTsSun Power'}];
+  setEmailSelect:any=[1, 2, 3,4];
 
   mounted() {
 

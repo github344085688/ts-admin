@@ -3,7 +3,7 @@
        .select-choices
            .item-Select(v-for="item in deselectData" ) {{item | filtersDatas}}
                .delete(v-on:click="deleteChoiceData(item)")
-           .PopPlaceholder(:class='isPlaceholder') for Usages in All Places...
+           .PopPlaceholder(:class='isPlaceholder') {{selecToDoing}}
            input(type="button"
             v-on:change="handleChange"
             v-on:focus="handleFocus"

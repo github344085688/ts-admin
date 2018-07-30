@@ -2,13 +2,17 @@
     .loding-bader
         <!--div {{searchInfo.phone}}-->
         <!--ui-select-choices.input(:isFocus="true" v-bind:selectData.sync="searchInfo.phone" v-bind:deselectData="setPhoneSelect")-->
-        div {{searchInfo.email}}
-        input-select-choices.input-select(:isFocus="true" v-bind:selectData.sync="searchInfo.email" v-bind:deselectData="setEmailSelect")
+        .dd {{searchInfo.email}}
+        select-filters.input-select(:isFocus="true" v-bind:selectData.sync="searchInfo.email" v-bind:porpData="setEmailSelect" v-bind:selecToDoing="'Factory'" v-bind:porpChooseData="setPhonesSelect"   )
+        .dd {{searchInfo.phone}}
+        select-filters.input-select(:isFocus="true" v-bind:selectData.sync="searchInfo.phone" v-bind:porpData="setPhoneSelect" v-bind:selecToDoing="'Input To Choose the factory'" v-bind:inputselect="true" v-bind:porpChooseData="setPhoneSelect"  )
+        <!--input-select-choices.input-select(:isFocus="true" v-bind:selectData.sync="searchInfo.email" v-bind:deselectData="setPhoneSelect")-->
 
 </template>
 
 <style lang="stylus">
 @import "../../assets/stylus/default"
+
 .loding-bader
     $wh(w 100%,h 100%);display flex;flex-direction column
     .input
