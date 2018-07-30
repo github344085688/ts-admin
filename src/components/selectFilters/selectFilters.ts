@@ -62,11 +62,8 @@ export default class TextFile extends axVue {
     value: string;
 
     SelectInputValue: string = '';
-
     callbackData: any = [];
-
     opensData: Array<any> = [];
-
     inputType:string='';
     isFocused: boolean = false;
     isActive: boolean = false;
@@ -83,7 +80,7 @@ export default class TextFile extends axVue {
 
     mounted() {
        if(this.porpChooseData) this.opensData = this.porpChooseData;
-       if( this.inputselect) this.inputType="text";
+       if(this.inputselect) this.inputType="text";
        else this.inputType="button";
     }
 
@@ -92,7 +89,6 @@ export default class TextFile extends axVue {
     handleChange() {}
 
     handleFocus(el: any) {
-        let _this = this;
         this.isFocused = true;
         if(! this.inputselect) {
             this.isSelectIng = true;
@@ -103,25 +99,19 @@ export default class TextFile extends axVue {
             if(this.porpChooseData){
                 this.isSelectIng = false;
             }else {
-                setTimeout(() => {
-                    _this.isSelectIng = false;
-                    _this.opensData = [1, 2, 3, 4];
-                }, 500)
+                this.getopensData("dd")
             }
             return false;
         }
         Observable.fromEvent(el.target, 'keyup')
             .debounceTime(1000)
             .subscribe((event: any) => {
-                if (!_this.SelectInputValue) return;
-                _this.porpData.length = 0;
-                _this.isActive = true;
-                _this.isSelectIng = true;
-                _this.callbackData = [];
-                setTimeout(() => {
-                    _this.isSelectIng = false;
-                    _this.opensData = [1, 2, 3, 4];
-                }, 500)
+                if (! this.SelectInputValue) return;
+                this.porpData.length = 0;
+                this.isActive = true;
+                this.isSelectIng = true;
+                this.callbackData = [];
+                this.getopensData("dd")
             })
     }
 
@@ -155,6 +145,14 @@ export default class TextFile extends axVue {
             }
         })
         this.$emit('update:selectData', this.callbackData)
+    }
+
+    private getopensData(api:string) {
+        let _this = this;
+        setTimeout(() => {
+            _this.isSelectIng = false;
+            _this.opensData = [1, 2, 3, 4];
+        }, 500)
     }
 }
 
