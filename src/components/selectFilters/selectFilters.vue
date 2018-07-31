@@ -2,8 +2,7 @@
 
     div
         .select-choices
-
-            .item-Select(v-for="item in porpData" ) {{item | filtersDatas}}
+            .item-Select(v-for="item in viewsData" ) {{item | filtersDatas}}
                 .delete(v-on:click="deleteChoiceData(item)")
             .PopPlaceholder(:class='isPlaceholder')
                 span {{selecToDoing}}
@@ -12,7 +11,7 @@
                     v-on:focus="handleFocus($event)"
                     v-on:input="handleInput($event)"
                     v-on:blur="handleBlur"
-                    v-model="SelectInputValue"
+                    v-model="selectInputValue"
             )
             slot
             .open-box(v-bind:class="isActive ? 'activeClass' : ''")
@@ -25,23 +24,16 @@
 
 </template>
 <style lang="stylus">
-    .div
-        width 300px; height 50px; background #ddd; display flex;
-        .item
-            width 20px; background #48ccbf;
-        .jj
-            margin-right  auto;
-
     @import "../../assets/stylus/default"
     .select-choices
-        $bodall(solid 1px #ccc no);$dflex(fd row,fw wrap,jc flex-start,ai center,ac center); margin-top 40px; width 100%; min-height 40px;/*no*/ position relative; padding 0 5px;/*no*/ border #ccc solid 1px;/*no*/ border-radius 4px;/*no*/ background #fff;padding-right 50px;/*no*/ box-sizing border-box;
+        $bodall(solid 1px #ccc no);$dflex(fd row,fw wrap,jc flex-start,ai center,ac center); margin-top 40px; width 100%; min-height 40px;/*no*/ position relative; padding 0 5px;/*no*/ border #ccc solid 1px;/*no*/ border-radius 4px;/*no*/ background #fff;padding-right 40px;/*no*/ box-sizing border-box; min-width 250px;/*no*/
         &::before
             $wh(w 20px no,h 20px no);$pAbM(p,r 25px no,t 50%); margin-top -10px;/*no*/ font-size 18px;/*no*/ content "\e901";
         input
             background none;border:none;outline none;cursor pointer; box-sizing border-box; z-index 1;
             &[type=text]
-                flex 1; display block; min-height 39px;/*no*/
-             &[type=button]
+                flex 1; display block; min-height 39px;/*no*/ display block;
+            &[type=button]
                  $wh(w 100%,h 100%);$pAbM(p,r 0,t 0,l 0, b 0);
 
         .PopPlaceholder

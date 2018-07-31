@@ -46,7 +46,7 @@ export default class TextFile extends axVue {
     porpChooseData?: any;
 
     @Prop({
-        default: []
+        default: null
     })
     porpData?: any;
 
@@ -54,14 +54,15 @@ export default class TextFile extends axVue {
     @Prop({
         default: ''
     })
-    PopPlaceholder: string;
+    PopPlaceholder?: string;
 
     @Prop({
         default: ''
     })
     value: string;
 
-    SelectInputValue: string = '';
+    viewsData:Array<any> = [];
+    selectInputValue: string = '';
     callbackData: any = [];
     opensData: Array<any> = [];
     inputType:string='';
@@ -70,15 +71,17 @@ export default class TextFile extends axVue {
     isSelectIng: boolean = false;
 
     get isPlaceholder(): any {
-        if (this.porpData.length > 0 || this.isFocused || this.SelectInputValue != '') return "isPlaceholder";
+        if (this.viewsData.length > 0 || this.isFocused || this.selectInputValue != '') return "isPlaceholder";
     }
 
     get isValidate(): any {
-        if (this.isFocused || this.value != '')   return true
+        if (this.isFocused || this.value != '')   return true;
         else return false
     }
 
     mounted() {
+
+       if(this.porpData) this.viewsData = this.porpData ;
        if(this.porpChooseData) this.opensData = this.porpChooseData;
        if(this.inputselect) this.inputType="text";
        else this.inputType="button";
@@ -92,7 +95,7 @@ export default class TextFile extends axVue {
         this.isFocused = true;
         if(! this.inputselect) {
             this.isSelectIng = true;
-            this.porpData.length = 0;
+            this.viewsData.length = 0;
             this.isActive = true;
             this.isSelectIng = true;
             this.callbackData = [];
@@ -106,8 +109,8 @@ export default class TextFile extends axVue {
         Observable.fromEvent(el.target, 'keyup')
             .debounceTime(1000)
             .subscribe((event: any) => {
-                if (! this.SelectInputValue) return;
-                this.porpData.length = 0;
+                if (! this.selectInputValue) return;
+                this.viewsData.length = 0;
                 this.isActive = true;
                 this.isSelectIng = true;
                 this.callbackData = [];
@@ -117,7 +120,7 @@ export default class TextFile extends axVue {
 
     handleBlur() {
         this.isActive = false;
-        if (this.porpData.length < 1) {
+        if (this.viewsData.length < 1) {
             this.isFocused = false;
             return false
         }
@@ -125,19 +128,19 @@ export default class TextFile extends axVue {
 
     pushDeselectDat(item: any) {
         this.isActive = true;
-        if (this.porpData.find((value: any) => value == item)) return false
-        this.porpData.push(item);
-        this.updateSelectData(this.porpData);
+        if (this.viewsData.find((value: any) => value == item)) return false
+        this.viewsData.push(item);
+        this.updateSelectData(this.viewsData);
     }
 
     deleteChoiceData(item: any) {
-        this.porpData.splice(this.porpData.indexOf(item), 1);
-        this.updateSelectData(this.porpData);
+        this.viewsData.splice(this.viewsData.indexOf(item), 1);
+        this.updateSelectData(this.viewsData);
     }
 
-    private updateSelectData(porpData: Array<any>) {
+    private updateSelectData(viewsData: Array<any>) {
         this.callbackData=[];
-        porpData.forEach((value:any)=>{
+        viewsData.forEach((value:any)=>{
             if (value.Name) {
                 this.callbackData.push(value.id)
             }else {
