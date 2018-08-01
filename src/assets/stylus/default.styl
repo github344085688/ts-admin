@@ -1,0 +1,97 @@
+@import "./common"
+@font-face {
+  font-family: 'icomoon';
+  src:  url('/src/assets/fonts/icomoon.eot?mgoo34');
+  src:  url('/src/assets/fonts/icomoon.eot?mgoo34#iefix') format('embedded-opentype'),
+          url('/src/assets/fonts/icomoon.ttf?mgoo34') format('truetype'),
+          url('/src/assets/fonts/icomoon.woff?mgoo34') format('woff'),
+          url('/src/assets/fonts/icomoon.svg?mgoo34#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-001:before {
+  content: "\e900";
+}
+.icon-002:before {
+  content: "\e901";
+}
+.icon-003:before {
+  content: "\e902";
+}
+.icon-004:before {
+  content: "\e903";
+}
+.icon-005:before {
+  content: "\e904";
+}
+
+
+[class^="select-"], [class*=" select-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.select-Arrowb:before {
+  content: "\e901";
+  color: #fff;
+}
+
+.select-close:before {
+  content: "\e900";
+  color: #fff;
+}
+
+$boderColor= #afb5c5;
+$focus-line= #b34049;
+$errorsColor= #a54b4e;
+
+input()
+  outline none;border none; background none;
+
+$box-shadow()
+  box-shadow 0px 1px 3px 0px #d9d9d9;
+  html.ie8 &,
+  html.ie7 &,
+  html.ie6 &
+    border 2px solid #bfbfbf;
+
+$field-input()
+  $box-shadow();$pad(l 25px no,r 25px no)
+
+$validateBox()
+  $WH(h 16px,'');color #999;line-height 10px;font-size 16px;
+
+$transform()
+   transform scaleX(0); transition transform .65s cubic-bezier(0.23, 1, 0.32, 1);
+
+fz(prop)
+  if prop[1]
+    font-size prop[0];/*no*/
+  else
+    font-size prop[0]
+
