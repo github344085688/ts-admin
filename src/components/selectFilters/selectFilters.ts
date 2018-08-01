@@ -32,6 +32,11 @@ export default class TextFile extends axVue {
     @Prop({
         default: false
     })
+    isArray?: any;
+
+    @Prop({
+        default: false
+    })
     inputselect?: any;
 
 
@@ -63,7 +68,7 @@ export default class TextFile extends axVue {
 
     viewsData:Array<any> = [];
     selectInputValue: string = '';
-    callbackData: any = [];
+    callbackData: any = null;
     opensData: Array<any> = [];
     inputType:string='';
     isFocused: boolean = false;
@@ -80,7 +85,6 @@ export default class TextFile extends axVue {
     }
 
     mounted() {
-
        if(this.porpData) this.viewsData = this.porpData ;
        if(this.porpChooseData) this.opensData = this.porpChooseData;
        if(this.inputselect) this.inputType="text";
@@ -98,7 +102,7 @@ export default class TextFile extends axVue {
             this.viewsData.length = 0;
             this.isActive = true;
             this.isSelectIng = true;
-            this.callbackData = [];
+            this.callbackData =null;
             if(this.porpChooseData){
                 this.isSelectIng = false;
             }else {
@@ -113,7 +117,7 @@ export default class TextFile extends axVue {
                 this.viewsData.length = 0;
                 this.isActive = true;
                 this.isSelectIng = true;
-                this.callbackData = [];
+                this.callbackData =null;
                 this.getopensData("dd")
             })
     }
@@ -127,26 +131,46 @@ export default class TextFile extends axVue {
     }
 
     pushDeselectDat(item: any) {
-        this.isActive = true;
-        if (this.viewsData.find((value: any) => value == item)) return false
-        this.viewsData.push(item);
-        this.updateSelectData(this.viewsData);
+        if (this.isArray){
+            if (this.viewsData.find((value: any) => value == item)) return false
+            this.viewsData.push(item);
+            this.isActive = true;
+            this.updateSelectData(this.viewsData);
+            return false
+        }
+        this.isActive=false;
+        this.isFocused=false;
+        this.viewsData = [item];
+        this.updateSelectData(item);
     }
 
     deleteChoiceData(item: any) {
-        this.viewsData.splice(this.viewsData.indexOf(item), 1);
-        this.updateSelectData(this.viewsData);
+        if (this.isArray){
+            this.viewsData.splice(this.viewsData.indexOf(item), 1);
+            this.updateSelectData(this.viewsData);
+        }
+
     }
 
-    private updateSelectData(viewsData: Array<any>) {
-        this.callbackData=[];
-        viewsData.forEach((value:any)=>{
-            if (value.Name) {
-                this.callbackData.push(value.id)
+    private updateSelectData(viewsData: any) {
+
+        if(Array.isArray(viewsData)){
+            this.callbackData=[];
+            viewsData.forEach((value:any)=>{
+                if (value.Name) {
+                    this.callbackData.push(value.id)
+                }else {
+                    this.callbackData.push(value)
+                }
+            })
+        }else {
+            if(viewsData.Name){
+                this.callbackData = viewsData.id;
             }else {
-                this.callbackData.push(value)
+                this.callbackData =viewsData;
             }
-        })
+        }
+
         this.$emit('update:selectData', this.callbackData)
     }
 

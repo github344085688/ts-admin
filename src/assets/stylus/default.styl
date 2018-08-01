@@ -1,14 +1,46 @@
 @import "./common"
 @font-face {
   font-family: 'icomoon';
-  src:  url('/src/assets/fonts/icomoon.eot?q7iq9o');
-  src:  url('/src/assets/fonts/icomoon.eot?q7iq9o#iefix') format('embedded-opentype'),
-          url('/src/assets/fonts/icomoon.ttf?q7iq9o') format('truetype'),
-          url('/src/assets/fonts/icomoon.woff?q7iq9o') format('woff'),
-          url('/src/assets/fonts/icomoon.svg?q7iq9o#icomoon') format('svg');
+  src:  url('/src/assets/fonts/icomoon.eot?mgoo34');
+  src:  url('/src/assets/fonts/icomoon.eot?mgoo34#iefix') format('embedded-opentype'),
+          url('/src/assets/fonts/icomoon.ttf?mgoo34') format('truetype'),
+          url('/src/assets/fonts/icomoon.woff?mgoo34') format('woff'),
+          url('/src/assets/fonts/icomoon.svg?mgoo34#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-001:before {
+  content: "\e900";
+}
+.icon-002:before {
+  content: "\e901";
+}
+.icon-003:before {
+  content: "\e902";
+}
+.icon-004:before {
+  content: "\e903";
+}
+.icon-005:before {
+  content: "\e904";
+}
+
 
 [class^="select-"], [class*=" select-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
@@ -63,26 +95,3 @@ fz(prop)
   else
     font-size prop[0]
 
-
-/*
-pad(types = padding, n = 5px)
-  if padding in types
-    padding n
-  if margin in types
-    margin n
-
-$font-size = 14px
-
-border-radius()
-  border-radius arguments
-  outline none
-  border none
-
-display()
-  display arguments
-
-support-for-ie ?= true
-opacity(n)
-  opacity n
-  if support-for-ie
-    filter unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=' + round(n * 100) + ')')*/

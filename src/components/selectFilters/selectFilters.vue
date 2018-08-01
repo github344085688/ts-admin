@@ -1,11 +1,14 @@
 <template lang="pug">
 
     div
-        .select-choices
-            .item-Select(v-for="item in viewsData" ) {{item | filtersDatas}}
+        .select-choices(v-bind:class="{ margintop: selecToDoing }")
+            .doth-Item-Select(v-for="item in viewsData" v-if="isArray" ) {{item | filtersDatas}}
                 .delete(v-on:click="deleteChoiceData(item)")
+            .odd-Item-Select(v-for="item in viewsData" v-if="!isArray" ) {{item | filtersDatas}}
+
             .PopPlaceholder(:class='isPlaceholder')
                 span {{selecToDoing}}
+
             input(:type="inputType"
                     v-on:change="handleChange"
                     v-on:focus="handleFocus($event)"
@@ -13,6 +16,7 @@
                     v-on:blur="handleBlur"
                     v-model="selectInputValue"
             )
+
             slot
             .open-box(v-bind:class="isActive ? 'activeClass' : ''")
                 lo-ding.selectLoding(:wh="'12px'" v-show="isSelectIng")
@@ -25,10 +29,12 @@
 </template>
 <style lang="stylus">
     @import "../../assets/stylus/default"
+    .margintop
+        margin-top 40px;
     .select-choices
-        $bodall(solid 1px #ccc no);$dflex(fd row,fw wrap,jc flex-start,ai center,ac center); margin-top 40px; width 100%; min-height 40px;/*no*/ position relative; padding 0 5px;/*no*/ border #ccc solid 1px;/*no*/ border-radius 4px;/*no*/ background #fff;padding-right 40px;/*no*/ box-sizing border-box; min-width 250px;/*no*/
+        $bodall(solid 1px #ccc no);$dflex(fd row,fw wrap,jc flex-start,ai center,ac center); width 100%; min-height 40px;/*no*/ position relative; padding 0 5px;/*no*/ border #ccc solid 1px;/*no*/ border-radius 4px;/*no*/ padding-right 40px;/*no*/ box-sizing border-box; min-width 150px;/*no*/
         &::before
-            $wh(w 20px no,h 20px no);$pAbM(p,r 25px no,t 50%); margin-top -10px;/*no*/ font-size 18px;/*no*/ content "\e901";
+            $wh(w 20px no,h 20px no);$pAbM(p,r 25px no,t 50%); margin-top -10px;/*no*/ font-size 18px;/*no*/ content "\e900";
         input
             background none;border:none;outline none;cursor pointer; box-sizing border-box; z-index 1;
             &[type=text]
@@ -41,12 +47,14 @@
         .isPlaceholder
             top -45px;/*no*/ transition all .5s;padding-left 0px;
 
-        .item-Select
-            $pad(l 15px, r 25px no);  z-index 2; min-width 80px; display inline-block; background #e8e8e8; margin 4px 5px;/*no*/ align-self center;border-radius 4px;/*no*/ position relative; font-size 14px; line-height 28px;/*no*/
+        .doth-Item-Select
+            $pad(l 15px, r 25px no);  z-index 2; min-width 80px; display inline-block; margin 4px 5px;/*no*/ align-self center;border-radius 4px;/*no*/ position relative; font-size 14px; line-height 28px;/*no*/
             .delete
                 $pAbM(p,r 3px no,t 50%);margin-top -10px;/*no*/ $wh(w 18px no,h 18px no);
                 &::before
-                    font-size 18px;/*no*/ content "\e900"; color #a4a4a4; line-height normal;cursor pointer;
+                    font-size 18px;/*no*/ content "\e901"; color #a4a4a4; line-height normal;cursor pointer;
+        .odd-Item-Select
+            min-width 80px; display inline-block;$pad(l 15px, r 25px no);  z-index 1;font-size 14px;margin 4px 5px;/*no*/ align-self center;border-radius 4px;/*no*/
 
         .open-box
             $pAbM(p,l 0,t 100%,r 0); margin-top 15px; max-height 150px;/*no*/  background #fff;box-shadow 0px 0px 4px #333333; border-radius 4px;/*no*/ z-index 10; height 0; overflow hidden;
@@ -56,7 +64,7 @@
                 $wh(w 0,h 0);$bod(l 8px solid transparent no,r 8px solid transparent no,b 8px solid #fff no);$pAbM(p,l 25px no,t -8px no);content "";
 
             ul
-                margin 0; padding 0 15px;/*no*/ position relative;
+                margin 0; padding 0 15px;/*no*/ position relative; display block;max-height 150px;/*no*/ overflow auto;
                 .selectLoding
                      $pAbM(p,l 0,t 0,r 0 , b 0); margin auto;
                 >li
