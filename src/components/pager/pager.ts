@@ -20,7 +20,6 @@ import selectFilters from '../../components/selectFilters/selectFilters.ts'
 })
 export default class Pager extends axVue {
 
-
     @Prop({ default: 10 })
     customizePageSize: number;
 
@@ -30,7 +29,6 @@ export default class Pager extends axVue {
     @Prop({ default: 5 })
     pagerShowCount: number;
 
-
     get showingFrom() {
         return (this.pager.activedPage - 1) * this.pageSize + 1;
     }
@@ -38,7 +36,6 @@ export default class Pager extends axVue {
     get showingTo() {
         return this.pager.activedPage * this.pageSize > this.totalCount ? this.totalCount : this.pager.activedPage * this.pageSize;
     }
-
 
     pager = { activedPage: 1, totalPage: 0, pagerShowCount: 0, halfPagerShowCount: 0, low: 0, high: 0 };
     pageSize = 0;
@@ -58,34 +55,30 @@ export default class Pager extends axVue {
         this.loadDefaultPager();
     }
 
-
-
     @Watch("totalCount")
     updateWhenTotalCountChange() {
         if (this.totalCount === 0 || this.lastTotalCount == this.totalCount) return;
         this.reInitialPager();
     }
 
-    @Watch("customizePageSize")
+    @Watch("pageSize")
     reRenderWhenCustomizePageSizeChange() {
-        this.reRenderWhenPageSizeChange(this.customizePageSize);
+        this.reRenderWhenPageSizeChange(this.pageSize);
     }
 
 
     reRenderWhenPageSizeChange(selectPageSize: number) {
-        console.log("Page Size change from inside" + selectPageSize);
         if (selectPageSize) {
             this.pageSize = selectPageSize;
         }
         if (this.pageSize === 0 || this.lastPageSize == this.pageSize) return;
         this.reInitialPager();
         this.inputPage = this.pager.activedPage;
-        this.$emit("reloadContent", { currentPage: this.pager.activedPage, pageSize: this.pageSize });
+        this.$emit("update:reloadContent", { currentPage: this.pager.activedPage, pageSize: this.pageSize });
     }
 
-
-
     private loadPage(page: number) {
+        if(! page) return ;
         this.changeActivePage(page);
     }
 
@@ -109,8 +102,6 @@ export default class Pager extends axVue {
         let number = this.inputPage > this.pager.totalPage ? this.pager.totalPage : this.inputPage;
         this.changeActivePage(Number(number));
     }
-
-
 
     private changeActivePage(page: number) {
         if (this.pager.activedPage == page)
@@ -156,36 +147,36 @@ export default class Pager extends axVue {
         this.pageSizeOptions = sortBy(uniq(defaultPageSizeOptions));
     }
 
-  loadPager(activedPage: number) {
-    let pages = [];
-    if (this.pager.totalPage < 5) {
-      for (let i = 1; i <= this.pager.totalPage; i++) {
-        pages.push({ "number": i, "active": false});
-      }
-      this.funActivedPage(pages , activedPage);
+    loadPager(activedPage: number) {
+        let pages = [];
+        if (this.pager.totalPage < 5) {
+            for (let i = 1; i <= this.pager.totalPage; i++) {
+                pages.push({"number": i, "active": false});
+            }
+            this.funActivedPage(pages, activedPage);
+        }
+        if (this.pager.totalPage > 4) {
+            if (activedPage < this.pager.totalPage - 3) {
+                pages = [
+                    {"number": activedPage, "active": false},
+                    {"number": activedPage + 1, "active": false},
+                    {"number": null, "active": false, "isHidden": true},
+                    {"number": this.pager.totalPage - 1, "active": false},
+                    {"number": this.pager.totalPage, "active": false}
+                ];
+                this.funActivedPage(pages, activedPage);
+            } else {
+                pages = [
+                    {"number": this.pager.totalPage - 3, "active": false},
+                    {"number": this.pager.totalPage - 2, "active": false},
+                    {"number": this.pager.totalPage - 1, "active": false},
+                    {"number": this.pager.totalPage, "active": false}
+                ];
+                this.funActivedPage(pages, activedPage);
+            }
+        }
+        return pages;
     }
-    if (this.pager.totalPage > 4) {
-      if ( activedPage < this.pager.totalPage - 3 ) {
-        pages = [
-          { "number": activedPage, "active": false },
-          { "number": activedPage + 1, "active": false},
-          { "number": null, "active": false, "isHidden": true },
-          { "number": this.pager.totalPage - 1, "active": false},
-          { "number": this.pager.totalPage, "active": false }
-        ];
-        this.funActivedPage(pages , activedPage);
-      } else {
-        pages = [
-          { "number": this.pager.totalPage - 3, "active": false },
-          { "number": this.pager.totalPage - 2, "active": false },
-          { "number": this.pager.totalPage - 1, "active": false},
-          { "number": this.pager.totalPage, "active": false }
-        ];
-        this.funActivedPage(pages , activedPage);
-      }
-    }
-    return pages;
-  }
   private funActivedPage(pages: any , activedPage: any) {
     forEach(pages, function (item) {
       if (item.number == activedPage) {

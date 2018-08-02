@@ -34,8 +34,8 @@
             fz(24px);$mar(l 15px no,r 15px no,t 15px no);order-radius 6px;/*no*/
         .divtext
             $wh(w 500px,h 200px); background rgba(12, 204, 91, 0.49);
-        .dd
-         font-size 14px;/*no*/
+.dd
+    font-size 14px;/*no*/
 
 </style>
 
