@@ -46,11 +46,10 @@ export default class Pager extends axVue {
     halfPagerShowCount = this.pagerShowCount / 2;
     stay = false;
     pages: any[] = [];
-    pageSizeOptions: any[] = [10, 50, 100, 300, 500, 1000];
+    pageSizeOptions: any[] = [1, 10, 20, 50, 100, 300, 500, 1000];
 
     mounted() {
         this.pageSize = this.customizePageSize;
-        this.setupPageSizeOptions();
         this.initialPager();
         this.loadDefaultPager();
     }
@@ -66,7 +65,6 @@ export default class Pager extends axVue {
         this.reRenderWhenPageSizeChange(this.pageSize);
     }
 
-
     reRenderWhenPageSizeChange(selectPageSize: number) {
         if (selectPageSize) {
             this.pageSize = selectPageSize;
@@ -74,7 +72,7 @@ export default class Pager extends axVue {
         if (this.pageSize === 0 || this.lastPageSize == this.pageSize) return;
         this.reInitialPager();
         this.inputPage = this.pager.activedPage;
-        this.$emit("update:reloadContent", { currentPage: this.pager.activedPage, pageSize: this.pageSize });
+        this.$emit("update:reloadContent", { currentPage: this.pager.activedPage, pageSize: this.pageSize, totalCount: this.totalCount});
     }
 
     private loadPage(page: number) {
@@ -139,12 +137,6 @@ export default class Pager extends axVue {
             this.pager.activedPage = 1;
             this.pages = this.loadPager(this.pager.activedPage);
         }
-    }
-
-    setupPageSizeOptions() {
-        let defaultPageSizeOptions = [1, 10, 20, 50, 100, 300, 500, 1000];
-        defaultPageSizeOptions.push(this.pageSize);
-        this.pageSizeOptions = sortBy(uniq(defaultPageSizeOptions));
     }
 
     loadPager(activedPage: number) {
