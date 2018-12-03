@@ -17,7 +17,7 @@
 
         .dd {{searchInfo.phonesss}}
         pager(v-bind:totalCount="600" v-bind:customizePageSize="20"  v-bind:reloadContent.sync="searchInfo.phonesss")
-
+        .dds(@click="skd") 点击我弹窗
 
 </template>
 

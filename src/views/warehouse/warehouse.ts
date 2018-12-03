@@ -38,7 +38,17 @@ export default class login extends axVue {
     Name: 'VIZDDSIO'
   }, {id: 'qz-45401', Name: 'SPjeTsSun Power'}];
   setEmailSelect:any=[1, 2, 3,4];
-
+  skd(){
+    this.$errorAlert({
+      title:'温馨提示',
+      content:'<div v-if="options.content" class="content">{{options.content}}</div><div v-if="options.content" class="content">{{options.content}}</div><div v-if="options.content" class="content">{{options.content}}</div><div v-if="options.content" class="content">{{options.content}}</div><div v-if="options.content" class="content">{{options.content}}</div> ',
+      confirm:'确定',
+    }).then((ord:any)=>{
+      console.log(ord)
+    }).catch((err:any)=>{
+      console.log("error");
+    })
+  };
   mounted() {
 
   }
