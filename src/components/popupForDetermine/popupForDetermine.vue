@@ -1,16 +1,12 @@
-<template>
-    <div class="autu-pop-up-win" v-show="show">
-        <div class="position-re">
-            <div class="modification">
-                <div v-if="options.title" class="title">{{options.title}}</div>
-                <div v-if="options.content" class="content">{{options.content}}</div>
-                <div class="bottom_box">
-                    <div v-if="options.cancel" class="bottom cancel " @click="cancelBtn">{{options.cancel}}</div>
-                    <div v-if="options.confirm" class="bottom sure" @click="successBtn">{{options.confirm}}</div>
-                </div>
-            </div>
-        </div>
-    </div>
+<template lang="pug">
+    .autu-pop-up-win(v-show="show")
+        .position-re
+            .modification
+                .title(v-if="options.title") {{options.title}}
+                .content(v-if="options.content") {{options.content}}
+                .bottom_box
+                    .bottom.cancel( @click.stop="cancelBtn" v-if="options.cancel") {{options.cancel}}
+                    .bottom.sure( @click.stop="successBtn($event)" v-if="options.confirm") {{options.confirm}}
 </template>
 <style lang="stylus">
     .autu-pop-up-win

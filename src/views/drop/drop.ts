@@ -29,17 +29,14 @@ export default class Drog extends axVue {
     peopledata: Array<any> = [{
         id: 1,
         name: '小颖',
-    }, {
-        id: 2,
-        name: 'hover',
-    }, {
-        id: 3,
-        name: '空巢青年三 ',
-    }, {
-        id: 3,
-        name: '一丢丢',
     }];
     dom :any = null;
+
+    dragTarget:string = '';
+    dropesLists:Array<any> = [{
+        name: '小颖',
+    }];
+
 
     drag(event: any) {
        this.dom = event.target;
@@ -49,15 +46,27 @@ export default class Drog extends axVue {
 
     drop(event: any, ppindex: any) {
         //event.preventDefault();
-        // event.target.appendChild(this.dom);
-         console.log(this.dom.innerHTML);
+         event.target.appendChild(this.dom);
+         console.log(event.target);
         return false;
     };
 
     allowDrop(event: any) {
-        // console.log(event.target);
         event.preventDefault();
         return true;
     };
+    onDrag(event: any) {
+        this.dragTarget = event.target.innerText;
+        return true;
+    };
+    onDrop(event: any, ppindex: any) {
+        if (this.dropesLists.findIndex((item: any) => item.name === this.dragTarget) > -1) return;
+         this.dropesLists.push({ name: this.dragTarget });
+    }
+
+    onAllowDrop(event: any) {
+        event.preventDefault();
+    }
+
 }
 

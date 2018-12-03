@@ -18,6 +18,7 @@
         .dd {{searchInfo.phonesss}}
         pager(v-bind:totalCount="600" v-bind:customizePageSize="20"  v-bind:reloadContent.sync="searchInfo.phonesss")
         .dds(@click="skd") 点击我弹窗
+        drop
 
 </template>
 
@@ -36,6 +37,8 @@
             $wh(w 500px,h 200px); background rgba(12, 204, 91, 0.49);
 .dd
     font-size 14px;/*no*/
+.dds
+    font-size 12px;/*no*/
 
 </style>
 

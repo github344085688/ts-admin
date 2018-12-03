@@ -1,19 +1,24 @@
-<template>
-    <div class='drag-content'>
-        <div class='project-content'>
-            <div class='select-item' draggable='true' @dragstart='drag($event)' v-for='pjdt in projectdatas'>{{pjdt.name}}</div>
-        </div>
-        <div class='people-content'>
-            <div class='drag-div' v-for='(ppindex,ppdt) in peopledata' @drop='drop($event)' @dragover='allowDrop($event)'>
-                <div class='select-project-item'>
-                    <label class='drag-people-label'>{{ppindex.name}}:</label>
-                </div>
-            </div>
-        </div>
-    </div>
+<template lang="pug">
+    .drag-content
+        .project-content
+            .select-item(v-on:dragstart.stop ='drag($event)' draggable='true' v-for='pjdt in projectdatas'  ) {{pjdt.name}}
+        .people-content
+            .drag-div( v-on:drop.stop.prevent = 'drop($event)' v-on:dragover.stop.prevent ='allowDrop($event)' v-for='(ppindex,ppdt) in peopledata' )
+                .select-project-item
+                    .drag-people-label {{ppindex.name}}
+
+        .drag-content
+        .project-content
+            .select-item(v-on:dragstart.stop ='onDrag($event)' draggable='true' v-for='pjdt in projectdatas'  ) {{pjdt.name}}
+        .people-content
+            .drag-div( v-on:drop.stop.prevent = 'onDrop($event)' v-on:dragover.stop.prevent ='onAllowDrop($event)' )
+                .select-project-item
+                    .drag-people-label(v-for='dropesList in dropesLists' ) {{dropesList.name}}
 </template>
 
 <style lang="stylus">
+    .drag-content
+        font-size 12px
     .select-item {
         background-color: #5bc0de;
         display: inline-block;
@@ -46,8 +51,9 @@
         border-radius: 3px;
     }
     .drag-people-label{
-        margin-bottom:0;
-        padding-right:10px;
+        display inline-block;
+        margin 5px;
+        padding:10px;
     }
 
 </style>

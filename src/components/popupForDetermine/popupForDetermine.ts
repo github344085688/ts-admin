@@ -15,12 +15,18 @@ export default class PopupForDetermine extends axVue {
 
     options: any ={};
 
-    successBtn(): void {
+    successBtn(event: any) {
         this.show = false;
+        let node = document.querySelector('.autu-pop-up-win');
+        if (node && node.parentNode) {
+            node.parentNode.removeChild(node)
+        }
     }
 
-    cancelBtn(): void {
+    cancelBtn(event: any): void {
         this.show = false;
+        console.log(event);
+
     }
 }
 
