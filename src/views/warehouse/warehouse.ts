@@ -8,6 +8,7 @@ import inputSelectChoices from '../../components/inputSelectChoices/inputSelectC
 import selectFilters from '../../components/selectFilters/selectFilters.ts'
 import pager from '../../components/pager/pager.ts'
 import axVue from '../../httpAnency'
+import drop from '../drop/drop.ts'
 
 
 @Component({
@@ -17,6 +18,7 @@ import axVue from '../../httpAnency'
     'input-select-choices':inputSelectChoices,
     'select-filters':selectFilters,
     'pager':pager,
+    'drop':drop
   }
 })
 export default class login extends axVue {
@@ -45,6 +47,7 @@ export default class login extends axVue {
       confirm:'确定',
     }).then((ord:any)=>{
       console.log(ord)
+      this.$forceUpdate();
     }).catch((err:any)=>{
       console.log("error");
     })
