@@ -1,0 +1,135 @@
+
+$pAbM(props)
+  props = arguments if length(arguments) > 1
+  for prop in props
+    if t in prop
+      if  prop[2]
+          top prop[1];/*no*/
+      else
+          top prop[1]
+    if r in prop
+      if  prop[2]
+         right prop[1];/*no*/
+      else
+        right prop[1]
+    if b in prop
+      if  prop[2]
+        bottom prop[1];/*no*/
+      else
+        bottom prop[1]
+    if l in prop
+      if  prop[2]
+        left prop[1];/*no*/
+      else
+        left prop[1]
+    if p in prop
+      position absolute
+    if m in prop
+      margin  prop[1]
+
+$wh(props)
+  props = arguments if length(arguments) > 1
+  for prop in props
+    if prop[0]==w
+      if  prop[2]
+        width prop[1];/*no*/
+      else
+        width prop[1]
+    if prop[0]==h
+      if  prop[2]
+        height prop[1];/*no*/
+      else
+        height prop[1]
+
+$pad(props)
+  props = arguments if length(arguments) > 1
+  for prop in props
+    if l in prop
+      if prop[2]
+         padding-left prop[1]; /*no*/
+      else
+         padding-left prop[1]
+    if r in prop
+      if  prop[2]
+         padding-right prop[1]; /*no*/
+      else
+         padding-right prop[1]
+    if t in prop
+      if prop[2]
+        padding-top  prop[1];/*no*/
+      else
+         padding-top  prop[1]
+    if b in prop
+      if prop[2]
+        padding-bottom  prop[1];/*no*/
+      else
+        padding-bottom  prop[1]
+
+$mar(props)
+  props = arguments if length(arguments) > 1
+  for prop in props
+    if l in prop
+      if prop[2]
+        margin-left  prop[1]; /*no*/
+      else
+        margin-left prop[1]
+    if r in prop
+      if  prop[2]
+        margin-right prop[1]; /*no*/
+      else
+        margin-right prop[1]
+    if t in prop
+      if prop[2]
+        margin-top  prop[1];/*no*/
+      else
+        margin-top  prop[1]
+    if b in prop
+      if prop[2]
+        margin-bottom  prop[1];/*no*/
+      else
+        margin-bottom  prop[1]
+
+$dflex(props)
+  display flex;
+  props = arguments if length(arguments) > 1
+  for prop in props
+    if ai in prop
+       align-items prop[1]
+    if ac in prop
+       align-content prop[1]
+    if fd in prop
+       flex-direction  prop[1]
+    if jc in prop
+       justify-content   prop[1]
+    if fw in prop
+       flex-wrap   prop[1]
+
+$bod(props)
+  props = arguments if length(arguments) > 1
+  for prop in props
+    if l in prop
+      if prop[4]
+        border-left prop[1] prop[2] prop[3] ; /*no*/
+      else
+        border-left prop[1] prop[2] prop[3]
+    if r in prop
+      if  prop[4]
+        border-right prop[1] prop[2] prop[3] ; /*no*/
+      else
+        border-right prop[1] prop[2] prop[3]
+    if t in prop
+      if prop[4]
+        border-top prop[1] prop[2] prop[3] ;/*no*/
+      else
+        border-top prop[1] prop[2] prop[3]
+    if b in prop
+      if prop[4]
+        border-bottom prop[1] prop[2] prop[3] ;/*no*/
+      else
+        border-bottom prop[1] prop[2] prop[3]
+
+$bodall(props)
+  if no in props
+    border props[0] props[1] props[2];/*no*/
+  else
+    border props
